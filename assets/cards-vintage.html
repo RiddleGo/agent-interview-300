@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>知识卡片 · 优雅复古风格</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --card-width: 400px;
+      --card-min-height: 1280px;
+      --paper: #f5f0e6;
+      --ink: #2c2420;
+      --ink-light: #5c524a;
+      --accent: #8b4513;
+      --border: #c4b8a8;
+      --quote-bg: rgba(139, 69, 19, 0.08);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: #e8e2d8;
+      padding: 2rem;
+      font-family: "Noto Serif SC", "Cormorant Garamond", Georgia, serif;
+    }
+    .page-title {
+      text-align: center;
+      color: var(--ink);
+      font-size: 1.25rem;
+      letter-spacing: 0.2em;
+      margin-bottom: 2rem;
+      font-weight: 600;
+    }
+    .cards-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+      align-items: flex-start;
+    }
+    .card {
+      width: var(--card-width);
+      min-height: var(--card-min-height);
+      background: var(--paper);
+      flex-shrink: 0;
+      padding: 2rem 1.75rem;
+      position: relative;
+      box-shadow: 0 4px 24px rgba(44, 36, 32, 0.12);
+      border: 1px solid var(--border);
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 1280' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    }
+    .card::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      opacity: 0.6;
+    }
+    .card-date {
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      color: var(--ink-light);
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      font-family: "Cormorant Garamond", serif;
+    }
+    .card-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 0.35rem;
+      line-height: 1.3;
+      letter-spacing: 0.02em;
+    }
+    .card-subtitle {
+      font-size: 0.85rem;
+      color: var(--ink-light);
+      font-style: italic;
+      margin-bottom: 1.25rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .card-quote {
+      margin: 1rem 0;
+      padding: 1rem 1.25rem;
+      background: var(--quote-bg);
+      border-left: 3px solid var(--accent);
+      font-size: 0.9rem;
+      color: var(--ink);
+      font-style: italic;
+      line-height: 1.6;
+    }
+    .card-list {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0;
+    }
+    .card-list li {
+      position: relative;
+      padding-left: 1.25rem;
+      margin-bottom: 0.6rem;
+      font-size: 0.85rem;
+      color: var(--ink);
+      line-height: 1.5;
+    }
+    .card-list li::before {
+      content: "—";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-size: 0.75rem;
+    }
+    .card-list .label {
+      color: var(--ink-light);
+      font-weight: 600;
+    }
+    .card-editor-note {
+      margin-top: 1.5rem;
+      padding: 0.9rem 1rem;
+      font-size: 0.75rem;
+      color: var(--ink-light);
+      background: rgba(196, 184, 168, 0.25);
+      border: 1px dashed var(--border);
+      font-family: "Cormorant Garamond", serif;
+      font-style: italic;
+    }
+    .card-editor-note strong { color: var(--accent); }
+  </style>
+</head>
+<body>
+  <h1 class="page-title">知识卡片 · 优雅复古 · 3:10 竖版</h1>
+  <div class="cards-row">
+    <article class="card" id="card-01">
+      <div class="card-date">March 2025 · LLM 基础</div>
+      <h2 class="card-title">01 | Self-Attention（自注意力）</h2>
+      <p class="card-subtitle">序列中每个位置根据与其它位置的相似度，对 Value 加权求和。</p>
+      <blockquote class="card-quote">Attention(Q,K,V) = softmax(QK<sup>T</sup> / √d<sub>k</sub>) V</blockquote>
+      <ul class="card-list">
+        <li><span class="label">步骤</span> Q,K,V → 分数 QK<sup>T</sup> → 缩放+softmax → AV</li>
+        <li><span class="label">复杂度</span> 时间 O(n²d)，空间 O(n²)</li>
+        <li><span class="label">要点</span> 长距离依赖、对序列顺序不敏感、缩放防梯度消失、多头增强表达</li>
+      </ul>
+      <div class="card-editor-note"><strong>编辑笔记</strong> 长序列时 n² 主导显存与算力，可考虑 Sparse / Local Attention 或线性注意力。</div>
+    </article>
+    <article class="card" id="card-02">
+      <div class="card-date">March 2025 · LLM 基础</div>
+      <h2 class="card-title">02 | 位置编码（Positional Encoding）</h2>
+      <p class="card-subtitle">为 Transformer 注入顺序信息，否则 Self-Attention 无法区分先后。</p>
+      <blockquote class="card-quote">绝对：每位置 t 一向量 p<sub>t</sub>；相对：在 Attention 中编码 i 与 j 的差值 i−j。</blockquote>
+      <ul class="card-list">
+        <li><span class="label">绝对</span> Sinusoidal、可学习；优点简单，缺点外推差</li>
+        <li><span class="label">相对</span> T5、RoPE、ALiBi；优点外推好，缺点实现稍复杂</li>
+        <li><span class="label">选用</span> Decoder-only 常用 RoPE/ALiBi；Encoder 常用绝对或 T5 相对</li>
+      </ul>
+      <div class="card-editor-note"><strong>小贴士</strong> 面试可一句话区分：绝对回答「第几个位置」，相对回答「相距多远」。</div>
+    </article>
+    <article class="card" id="card-03">
+      <div class="card-date">March 2025 · LLM 基础</div>
+      <h2 class="card-title">03 | Layer Normalization</h2>
+      <p class="card-subtitle">对单样本、层内特征标准化，不依赖 batch 与序列长度。</p>
+      <blockquote class="card-quote">LN(h) = γ · (h−μ)/√(σ²+ε) + β，μ、σ 在特征维 d 上求。</blockquote>
+      <ul class="card-list">
+        <li><span class="label">与 BN</span> BN 对 batch 维；LN 对特征维，与 n、batch 无关</li>
+        <li><span class="label">选用</span> Transformer 用 LN：序列变长、小 batch、训练/推理一致</li>
+      </ul>
+      <div class="card-editor-note"><strong>编辑笔记</strong> 序列模型用 LN 是标配；BN 在 NLP 中多用于小固定长度或非自回归任务。</div>
+    </article>
+    <article class="card" id="card-04">
+      <div class="card-date">March 2025 · LLM 基础</div>
+      <h2 class="card-title">04 | 注意力掩码（Attention Mask）</h2>
+      <p class="card-subtitle">在 softmax 前屏蔽某些位置，使对应注意力权重为 0。</p>
+      <blockquote class="card-quote">scores + M；M=−∞ 处 softmax 后为 0。</blockquote>
+      <ul class="card-list">
+        <li><span class="label">Padding mask</span> 屏蔽 pad；有 pad 即用</li>
+        <li><span class="label">Causal mask</span> 屏蔽 j&gt;i；自回归训练与推理必用</li>
+      </ul>
+      <div class="card-editor-note"><strong>小贴士</strong> 两种可叠加：先 causal 再在 pad 位置加 padding mask。</div>
+    </article>
+    <article class="card" id="card-05">
+      <div class="card-date">March 2025 · LLM 基础</div>
+      <h2 class="card-title">05 | KV Cache</h2>
+      <p class="card-subtitle">缓存已算过的 K、V，每步只算新 token 的 k<sub>t</sub>, v<sub>t</sub> 并拼到缓存。</p>
+      <blockquote class="card-quote">K<sub>1:t</sub> = [K<sub>1:t−1</sub>; k<sub>t</sub>]，V 同理；Attention(q<sub>t</sub>, K<sub>1:t</sub>, V<sub>1:t</sub>)。</blockquote>
+      <ul class="card-list">
+        <li><span class="label">作用</span> 避免对历史重复算 K/V，降低解码计算与延迟</li>
+        <li><span class="label">代价</span> 显存随序列长度、层数、batch 线性增</li>
+      </ul>
+      <div class="card-editor-note"><strong>编辑笔记</strong> 长序列需长度/批大小控制或 PagedAttention 等优化。</div>
+    </article>
+    <article class="card" id="card-06">
+      <div class="card-date">March 2025 · LLM 基础</div>
+      <h2 class="card-title">06 | 解码策略对比</h2>
+      <p class="card-subtitle">Greedy / Beam / Temperature / Top-p 的取舍。</p>
+      <blockquote class="card-quote">开放生成多用 Temperature + Top-p；翻译/摘要可用 Beam；要确定性用 Greedy 或低 T。</blockquote>
+      <ul class="card-list">
+        <li><span class="label">Greedy</span> 每步最大概；简单快，单调</li>
+        <li><span class="label">Beam</span> 保留 k 条；连贯可控，贵</li>
+        <li><span class="label">T / Top-p</span> 调多样性；常合用</li>
+      </ul>
+      <div class="card-editor-note"><strong>小贴士</strong> 创意对话：T+Top-p；需可复现：低 T 或 Greedy。</div>
+    </article>
+    <article class="card" id="card-07">
+      <div class="card-date">March 2025 · LLM 基础</div>
+      <h2 class="card-title">07 | 困惑度（Perplexity）</h2>
+      <p class="card-subtitle">测试集上交叉熵的指数，越低表示语言建模越好。</p>
+      <blockquote class="card-quote">PPL = exp(−1/N Σ ln P(x<sub>i</sub>|x<sub>&lt;i</sub>))。</blockquote>
+      <ul class="card-list">
+        <li><span class="label">含义</span> 平均“等价选项数”；PPL=1 理想</li>
+        <li><span class="label">用途</span> 比较模型与 baseline；主要反映语言建模</li>
+      </ul>
+      <div class="card-editor-note"><strong>编辑笔记</strong> 与下游任务相关但不完全一致，需结合下游指标。</div>
+    </article>
+    <article class="card" id="card-08">
+      <div class="card-date">March 2025 · LLM 基础</div>
+      <h2 class="card-title">08 | 涌现能力（Emergent Abilities）</h2>
+      <p class="card-subtitle">随规模增大在较窄区间内突然出现或跃升的能力。</p>
+      <blockquote class="card-quote">少样本、CoT、指令遵循、工具使用等。</blockquote>
+      <ul class="card-list">
+        <li><span class="label">定义</span> 难以由小模型外推预测</li>
+        <li><span class="label">成因</span> Scaling、评估曲线非线性、数据与目标</li>
+      </ul>
+      <div class="card-editor-note"><strong>小贴士</strong> 并非“魔法”，与评估与 scaling 行为有关。</div>
+    </article>
+    <article class="card" id="card-09">
+      <div class="card-date">March 2025 · LLM 基础</div>
+      <h2 class="card-title">09 | 上下文学习（ICL）</h2>
+      <p class="card-subtitle">不更新参数，仅在 prompt 中给示例，模型即能按任务预测。</p>
+      <blockquote class="card-quote">示例1→输出1；示例2→输出2；查询 → 模型生成。</blockquote>
+      <ul class="card-list">
+        <li><span class="label">与微调</span> 微调改参数；ICL 不改，靠前向表示与注意力</li>
+        <li><span class="label">机制</span> 隐式推断、注意力类比、任务方向等（无定论）</li>
+      </ul>
+      <div class="card-editor-note"><strong>编辑笔记</strong> 大模型上效果显著，小模型有限。</div>
+    </article>
+    <article class="card" id="card-10">
+      <div class="card-date">March 2025 · LLM 基础</div>
+      <h2 class="card-title">10 | Chain-of-Thought（CoT）</h2>
+      <p class="card-subtitle">先写推理步骤、再写答案；任务分解、格式对齐。</p>
+      <blockquote class="card-quote">“Let's think step by step” 或 few-shot 带步骤示例。</blockquote>
+      <ul class="card-list">
+        <li><span class="label">有效性</span> 规模依赖、降低单步难度、激活推理模式</li>
+        <li><span class="label">增强</span> Self-Consistency：多条链取多数答案</li>
+      </ul>
+      <div class="card-editor-note"><strong>小贴士</strong> 数学/逻辑题优先考虑 CoT + Self-Consistency。</div>
+    </article>
+    <article class="card" id="card-11">
+      <div class="card-date">March 2025 · LLM 基础</div>
+      <h2 class="card-title">11 | Encoder / Decoder 架构对比</h2>
+      <p class="card-subtitle">理解型 vs 生成型 vs 源-目标型。</p>
+      <blockquote class="card-quote">Encoder-only 理解；Decoder-only 生成+ICL；Encoder-Decoder 翻译/摘要。</blockquote>
+      <ul class="card-list">
+        <li><span class="label">Encoder-only</span> BERT；分类、NLI、抽取、检索</li>
+        <li><span class="label">Decoder-only</span> GPT/LLaMA；对话、通用</li>
+        <li><span class="label">Enc-Dec</span> T5/BART；有明确源-目标</li>
+      </ul>
+      <div class="card-editor-note"><strong>编辑笔记</strong> 大模型主流为 Decoder-only。</div>
+    </article>
+    <article class="card" id="card-12">
+      <div class="card-date">March 2025 · LLM 基础</div>
+      <h2 class="card-title">12 | 模型 / 数据 / 流水线并行</h2>
+      <p class="card-subtitle">DP 同模型不同数据；MP/TP 拆层；PP 按层分段流水。</p>
+      <blockquote class="card-quote">大模型训练常 DP + TP + PP 组合。</blockquote>
+      <ul class="card-list">
+        <li><span class="label">数据并行</span> 单卡能放下模型时首选</li>
+        <li><span class="label">模型/张量并行</span> 单卡放不下层时用</li>
+        <li><span class="label">流水线并行</span> 层多、整模型放不下；注意气泡</li>
+      </ul>
+      <div class="card-editor-note"><strong>小贴士</strong> Megatron-LM 即 TP+PP+DP。</div>
+    </article>
+    <article class="card" id="card-13">
+      <div class="card-date">March 2025 · LLM 基础</div>
+      <h2 class="card-title">13 | 混合精度训练</h2>
+      <p class="card-subtitle">前向/反向 FP16，主权重+优化器 FP32；loss scaling + 敏感层 FP32。</p>
+      <blockquote class="card-quote">算力与带宽更优；FP32 防累积误差；scaling 防梯度下溢。</blockquote>
+      <ul class="card-list">
+        <li><span class="label">优势</span> 加速、省显存、效果与 FP32 相当</li>
+      </ul>
+      <div class="card-editor-note"><strong>编辑笔记</strong> V100/A100 上 FP16 有 Tensor Core 加速。</div>
+    </article>
+    <article class="card" id="card-14">
+      <div class="card-date">March 2025 · LLM 基础</div>
+      <h2 class="card-title">14 | 梯度累积</h2>
+      <p class="card-subtitle">多步小 batch 梯度累加（或平均），每 k 步更新一次。</p>
+      <blockquote class="card-quote">有效 batch = 小 batch × k；单步显存由小 batch 决定。</blockquote>
+      <ul class="card-list">
+        <li><span class="label">作用</span> 缓解 OOM，等效大 batch 训练</li>
+        <li><span class="label">注意</span> BN 统计仍按小 batch；k 大时调学习率</li>
+      </ul>
+      <div class="card-editor-note"><strong>小贴士</strong> 无 BN 的 Transformer 用梯度累积很自然。</div>
+    </article>
+    <article class="card" id="card-15">
+      <div class="card-date">March 2025 · LLM 基础</div>
+      <h2 class="card-title">15 | LoRA</h2>
+      <p class="card-subtitle">W′ = W + AB，A、B 低秩；只训 A、B，冻结 W。</p>
+      <blockquote class="card-quote">参数量 r(d+k) ≪ dk；A 小随机、B 零初始化。</blockquote>
+      <ul class="card-list">
+        <li><span class="label">放置</span> 常对 attention Q/V 与 FFN 加 LoRA</li>
+        <li><span class="label">推理</span> 可合并为 W′ 或保留多组 A,B</li>
+      </ul>
+      <div class="card-editor-note"><strong>编辑笔记</strong> 秩 r=8/16/32 常用。</div>
+    </article>
+    <article class="card" id="card-16">
+      <div class="card-date">March 2025 · LLM 基础</div>
+      <h2 class="card-title">16 | 微调方法对比</h2>
+      <p class="card-subtitle">Full FT / LoRA / Adapter / Prompt Tuning。</p>
+      <blockquote class="card-quote">LoRA 最常用；Adapter 多任务；Prompt Tuning 极省参数。</blockquote>
+      <ul class="card-list">
+        <li><span class="label">Full FT</span> 全参数，显存高</li>
+        <li><span class="label">LoRA</span> 省显存、可合并推理</li>
+        <li><span class="label">Adapter</span> 模块化、多任务</li>
+      </ul>
+      <div class="card-editor-note"><strong>小贴士</strong> 资源紧时优先 LoRA 或 Prompt Tuning。</div>
+    </article>
+    <article class="card" id="card-17">
+      <div class="card-date">March 2025 · LLM 基础</div>
+      <h2 class="card-title">17 | 模型量化</h2>
+      <p class="card-subtitle">权重/激活从 FP 映射到低比特整数，省显存、提吞吐。</p>
+      <blockquote class="card-quote">INT8 对称 per-tensor/channel；INT4 分组+GPTQ/AWQ 校准。</blockquote>
+      <ul class="card-list">
+        <li><span class="label">INT8</span> 精度损失小、硬件支持好</li>
+        <li><span class="label">INT4</span> 更省显存，依赖校准与组大小</li>
+      </ul>
+      <div class="card-editor-note"><strong>编辑笔记</strong> QLoRA 即 LoRA + INT4 量化 backbone。</div>
+    </article>
+    <article class="card" id="card-18">
+      <div class="card-date">March 2025 · LLM 基础</div>
+      <h2 class="card-title">18 | GQA 与 MQA</h2>
+      <p class="card-subtitle">MQA 所有头共享 K、V；GQA 组内共享，折中。</p>
+      <blockquote class="card-quote">动机：解码时省 KV Cache、提吞吐。</blockquote>
+      <ul class="card-list">
+        <li><span class="label">MQA</span> KV Cache 最小，表达弱</li>
+        <li><span class="label">GQA</span> 省 Cache 且保留多数表达；LLaMA-2 采用</li>
+      </ul>
+      <div class="card-editor-note"><strong>小贴士</strong> 大模型解码端 GQA 已成主流。</div>
+    </article>
+    <article class="card" id="card-19">
+      <div class="card-date">March 2025 · LLM 基础</div>
+      <h2 class="card-title">19 | RoPE</h2>
+      <p class="card-subtitle">旋转位置编码：Q、K 按位置旋转，score 只依赖 i−j。</p>
+      <blockquote class="card-quote">相对性、外推好、不占嵌入；LLaMA 等广泛采用。</blockquote>
+      <ul class="card-list">
+        <li><span class="label">优势</span> 利于语法/指代，外推友好</li>
+      </ul>
+      <div class="card-editor-note"><strong>编辑笔记</strong> Decoder-only 大模型主流位置编码。</div>
+    </article>
+    <article class="card" id="card-20">
+      <div class="card-date">March 2025 · LLM 基础</div>
+      <h2 class="card-title">20 | SwiGLU</h2>
+      <p class="card-subtitle">SwiGLU(x) = Swish(W1x) ⊙ (W2x)；门控 + Swish 平滑。</p>
+      <blockquote class="card-quote">PaLM/LLaMA 将 FFN 换为 SwiGLU，效果优于 ReLU/GELU。</blockquote>
+      <ul class="card-list">
+        <li><span class="label">代价</span> 多一路线性，需在隐藏维上平衡参数量</li>
+      </ul>
+      <div class="card-editor-note"><strong>小贴士</strong> 大模型 FFN 常见选择。</div>
+    </article>
+  </div>
+</body>
+</html>

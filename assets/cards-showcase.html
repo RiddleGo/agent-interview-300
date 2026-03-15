@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>知识卡片展示 | 孟菲斯解构主义</title>
+  <style>
+    :root {
+      --card-width: 400px;
+      --card-min-height: 1280px;
+      --pink: #ff6b9d;
+      --cyan: #00d4aa;
+      --lemon: #ffea00;
+      --orange: #ff8c42;
+      --gray: #2d2d2d;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+      padding: 2rem;
+      /* 孟菲斯点缀：几何色块 */
+      background-image:
+        linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%),
+        radial-gradient(circle at 20% 80%, rgba(255, 107, 157, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(0, 212, 170, 0.12) 0%, transparent 50%);
+    }
+    .showcase-title {
+      color: #fff;
+      text-align: center;
+      margin-bottom: 2rem;
+      font-size: 1.5rem;
+      letter-spacing: 0.05em;
+    }
+    .cards-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+      align-items: flex-start;
+    }
+    .card-wrap {
+      width: var(--card-width);
+      min-height: var(--card-min-height);
+      flex-shrink: 0;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      /* 容器保持 3:10 竖版体验 */
+    }
+    .card-wrap img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border: 2px solid var(--pink);
+      box-shadow: 8px 8px 0 var(--cyan), -4px -4px 0 var(--orange);
+    }
+    @media (max-width: 480px) {
+      .card-wrap { width: 100%; max-width: var(--card-width); }
+    }
+  </style>
+</head>
+<body>
+  <h1 class="showcase-title">知识卡片 · 孟菲斯解构主义 · 3:10 竖版</h1>
+  <div class="cards-row">
+    <div class="card-wrap">
+      <img src="card-01-Self-Attention.png" alt="Self-Attention 知识卡片" />
+    </div>
+    <div class="card-wrap">
+      <img src="card-02-position-encoding.png" alt="位置编码知识卡片" />
+    </div>
+  </div>
+</body>
+</html>
