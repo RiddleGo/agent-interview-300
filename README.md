@@ -39,6 +39,17 @@
 - 按题号在对应模块下查找文章。
 - 每篇文章含 **完整讲解 + 面试要点 + 记忆要点**，便于掌握与复习。
 
+### 单页复习页 `study.html`
+
+根目录下的 **[study.html](./study.html)** 由脚本 **`build_study_html.py`** 扫描仓库内 Markdown 自动生成：左侧目录、全文搜索、随机跳题等，适合用浏览器离线打开、集中翻阅。修改任意 `.md` 后若要让单页与正文一致，请在仓库根目录执行：
+
+```bash
+pip install markdown   # 首次需要
+python build_study_html.py
+```
+
+生成结果写入 `study.html`；脚本会跳过 `GITHUB_推送说明.md`（仅运维说明，不纳入学习页）。
+
 ---
 
 ## 索引（1–20 题：LLM 基础）
