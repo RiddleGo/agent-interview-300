@@ -41,7 +41,12 @@
 
 ### 单页复习页 `study.html`
 
-根目录下的 **[study.html](./study.html)** 由脚本 **`build_study_html.py`** 扫描仓库内 Markdown 自动生成：左侧目录、全文搜索、随机跳题等，适合用浏览器离线打开、集中翻阅。修改任意 `.md` 后若要让单页与正文一致，请在仓库根目录执行：
+- **克隆到本地后**：用浏览器直接打开根目录下的 [study.html](./study.html) 即可。
+- **在浏览器里在线看**（按网页渲染，有目录与搜索）：请打开 **GitHub Pages** 地址  
+  **[https://riddlego.github.io/agent-interview-300/study.html](https://riddlego.github.io/agent-interview-300/study.html)**  
+  **不要**使用 `https://raw.githubusercontent.com/.../study.html` 或点 GitHub 上的 **Raw**：服务器会把内容标成 `text/plain`，浏览器只会当**源码**显示，无法当正常网页浏览。
+
+由脚本 **`build_study_html.py`** 扫描仓库内 Markdown 自动生成单页。修改任意 `.md` 后若要让单页与正文一致，请在仓库根目录执行：
 
 ```bash
 pip install markdown   # 首次需要

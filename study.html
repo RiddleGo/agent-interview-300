@@ -493,6 +493,18 @@ html.light .md a {
 <li>按题号在对应模块下查找文章。</li>
 <li>每篇文章含 <strong>完整讲解 + 面试要点 + 记忆要点</strong>，便于掌握与复习。</li>
 </ul>
+<h3>单页复习页 <code>study.html</code></h3>
+<ul>
+<li><strong>克隆到本地后</strong>：用浏览器直接打开根目录下的 <a href="./study.html">study.html</a> 即可。</li>
+<li><strong>在浏览器里在线看</strong>（按网页渲染，有目录与搜索）：请打开 <strong>GitHub Pages</strong> 地址<br />
+<strong><a href="https://riddlego.github.io/agent-interview-300/study.html">https://riddlego.github.io/agent-interview-300/study.html</a></strong><br />
+<strong>不要</strong>使用 <code>https://raw.githubusercontent.com/.../study.html</code> 或点 GitHub 上的 <strong>Raw</strong>：服务器会把内容标成 <code>text/plain</code>，浏览器只会当<strong>源码</strong>显示，无法当正常网页浏览。</li>
+</ul>
+<p>由脚本 <strong><code>build_study_html.py</code></strong> 扫描仓库内 Markdown 自动生成单页。修改任意 <code>.md</code> 后若要让单页与正文一致，请在仓库根目录执行：</p>
+<pre><code class="language-bash">pip install markdown   # 首次需要
+python build_study_html.py
+</code></pre>
+<p>生成结果写入 <code>study.html</code>；脚本会跳过 <code>GITHUB_推送说明.md</code>（仅运维说明，不纳入学习页）。</p>
 <hr />
 <h2>索引（1–20 题：LLM 基础）</h2>
 <table>
@@ -693,6 +705,7 @@ html.light .md a {
 <blockquote>
 <p>文中所有<strong>可点击的链接</strong>都会跳转到对应面试题的详解。</p>
 <p>建议边读边点，像翻地图一样逛完 300 个知识点。</p>
+<p>若更习惯「单页 + 侧栏目录 + 搜索」：本地可打开 <strong><a href="./study.html">study.html</a></strong>；在线请用 Pages <strong><a href="https://riddlego.github.io/agent-interview-300/study.html">https://riddlego.github.io/agent-interview-300/study.html</a></strong>（勿用 <code>raw.githubusercontent.com</code> 的 Raw 链接，否则只会显示 HTML 源码）。该文件由 <code>build_study_html.py</code> 生成，改文后需重新运行脚本再提交 <code>study.html</code>。</p>
 </blockquote>
 <hr />
 <h2>序章：明天要面「Agent 全栈」，今晚只有一夜</h2>
